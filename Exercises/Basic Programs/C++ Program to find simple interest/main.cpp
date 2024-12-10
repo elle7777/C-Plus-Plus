@@ -12,6 +12,7 @@ double interestCalculator(double initialAmount, double interestRate, int interes
 }
 int main()
 {
+p1:
     double initialAmount; 
     double interestRate; //percentage
     int interestTime; //years
@@ -26,4 +27,5 @@ int main()
     
     double finalAmount = interestCalculator(initialAmount, interestRate, interestTime);
     cout << "Your amount after " << interestTime << " is " << finalAmount << "$" << endl;
+    goto p1;
 }
