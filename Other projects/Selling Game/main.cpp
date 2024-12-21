@@ -66,6 +66,15 @@ void inventory()
 }
 int buySupplies()
 {
+    string item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
+    double price[5] = {0.05, 0.07, 0.08, 0.10, 0.12};
+    cout << "The Supplier\n\n";
+    cout << "no. | item\t| price\n\n";
+    for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
+    {
+        cout << " " << itemIndex + 1 << ")  s" << item[itemIndex] << "\t| " << price[itemIndex] << "\n";
+    }
+    cout << "\n";
     return 0;
 }
 int main()
@@ -80,8 +89,10 @@ int main()
     {
         selector = menu();
         if(selector == 0) {continue;}
-        enterToContinue();
+        //enterToContinue();
         if(selector == 1) {inventory();}
+        //enterToContinue();
+        if(selector == 2) {buySupplies();}
         enterToContinue();
     }
     return 0;
