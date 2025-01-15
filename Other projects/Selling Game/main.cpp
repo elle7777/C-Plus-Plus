@@ -1,5 +1,6 @@
 #include <iostream>
 #include <limits>
+#include "classes.cpp"
 using namespace std;
 
 int menu()
@@ -42,57 +43,31 @@ int menu()
 }
 void enterToContinue()
 {
+    cin.clear();
+    cin.ignore(LONG_LONG_MAX, '\n');
     cout << "Enter to Continue";
     if(cin.get() == 10){}
     else
     {
         enterToContinue();
     }
-}
-void inventory()
-{
-    string item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
-    double price[5] = {0.50, 0.70, 0.80, 1.00, 1.20};
-    int quantity[5] = {0, 0 ,0 ,0 ,0};
-
-    cout << "Your Inventory: \n\n";
-    cout << "item\t|\tquantity\t|\tprice\n\n";
-    //cout << "----\t--------\t-----\t\n\n";
-    for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
-    {
-        cout << item[itemIndex] << "\t|\t" << quantity[itemIndex] << "\t\t|\t£" << price[itemIndex] << "\n";
-    }
     cout << "\n";
-}
-int buySupplies()
-{
-    string item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
-    double price[5] = {0.05, 0.07, 0.08, 0.10, 0.12};
-    cout << "The Supplier\n\n";
-    cout << "no. | item\t| price\n\n";
-    for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
-    {
-        cout << " " << itemIndex + 1 << ")  s" << item[itemIndex] << "\t| " << price[itemIndex] << "\n";
-    }
-    cout << "\n";
-    return 0;
 }
 int main()
 {
-    int selector; 
-    string item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
-    double price[5] = {0.50, 0.70, 0.80, 1.00, 1.20};
-    int quantity[5] = {0, 0 ,0 ,0 ,0};
+    int selector;
+    inventorySys inv;
+    inv.item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
 
     cout << "[---Selling Game---]\n\n";
     while (true)
     {
         selector = menu();
-        if(selector == 0) {continue;}
+        if(selector == 0){continue;}
         //enterToContinue();
-        if(selector == 1) {inventory();}
+        if(selector == 1){inv.inventory();}
         //enterToContinue();
-        if(selector == 2) {buySupplies();}
+        if(selector == 2){inv.supplier(); inv.select(); }
         enterToContinue();
     }
     return 0;
