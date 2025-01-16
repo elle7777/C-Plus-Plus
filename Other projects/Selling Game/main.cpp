@@ -44,7 +44,7 @@ int menu()
 void enterToContinue()
 {
     cin.clear();
-    cin.ignore(LONG_LONG_MAX, '\n');
+    cin.get();
     cout << "Enter to Continue";
     if(cin.get() == 10){}
     else
@@ -57,7 +57,8 @@ int main()
 {
     int selector;
     inventorySys inv;
-    inv.item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
+    //inv.item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
+    
 
     cout << "[---Selling Game---]\n\n";
     while (true)
@@ -67,7 +68,7 @@ int main()
         //enterToContinue();
         if(selector == 1){inv.inventory();}
         //enterToContinue();
-        if(selector == 2){inv.supplier(); inv.select(); }
+        if(selector == 2){inv.supplier();}
         enterToContinue();
     }
     return 0;
