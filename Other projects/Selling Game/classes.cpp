@@ -5,117 +5,202 @@ class inventorySys
 {
     private:
     string item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
-    double price[5] = {0.5, 0.7, 0.4, 0.3, 0.6};
-    double supplierPrice[5] = {0.05, 0.07, 0.04, 0.03, 0.06};
+    double prices[5] = {0.5, 0.7, 0.4, 0.3, 0.6};
+    double supplierPrices[5] = {0.05, 0.07, 0.04, 0.03, 0.06};
     int itemsBought[5] = {0, 0, 0, 0, 0};
     
     public:
     void inventory()
     {
-        cout << "Inventory\n\n";
+        cout << "[---Inventory---]\n";
         cout << "no. | item\t| price\t| quantity\n";
-        for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
+        for (int itemIndex = 0; itemIndex < 5; itemIndex++)
         {
-            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << price[itemIndex] << "\t| " << itemsBought[itemIndex] << "\n";
+            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << prices[itemIndex] << "\t| " << itemsBought[itemIndex] << "\n";
         }
-        cout << "\n\n";
+        cout << "\n";
+        enterToContinue();
+        return;
     }
-    void supplier()
+    void buySupply(int itemIndex)
     {
-        cout << "The Supplier\n\n";
-        cout << "no. | item\t| price\n";
-        for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
+        int quantity;
+        inventorySys inv;
+        
+        cout << "how many " << item[itemIndex] << " do you want to buy?: ";
+        cin >> quantity;
+        
+        if(quantity == 0)
         {
-            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << price[itemIndex] << "\n";
+            cin.clear();
+            return;
+        }
+
+        if(!quantity || quantity > 999)
+        {
+            cout << "insert a whole number less than 999\n";
+            cin.clear();
+            cin.ignore(LONG_MAX, '\n');
+            buySupply(itemIndex);
+        }
+        
+        cout << "you bought " << quantity << " " << item[3] << "\n\n";
+        buyItems(itemIndex, quantity);
+        return;
+    }
+    void supplyMenu()
+    {
+        int selector;
+
+        cout << "[---The Supplier---]\n";
+        cout << "no. | item\t| price\n";
+        for (int itemIndex = 0; itemIndex < 5; itemIndex++)
+        {
+            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << prices[itemIndex] << "\n";
         }
         cout << "0) Exit\n\n";
-        buySupplies();
+
+        cout << "Select an item to buy: ";
+        cin >> selector;
+        if(selector == 0)
+        {
+            cin.clear();
+            enterToContinueIn();
+            return;
+        }
+        if(!selector || selector > 6)
+        {
+            cout << "error, insert a number 1-5\n";
+            cin.ignore(LONG_MAX, '\n');
+            supplyMenu();
+        }
+        switch (selector)
+        {
+            case 1:
+                buySupply(0);
+                break;
+            case 2:
+                buySupply(1);
+                break;
+            case 3:
+                buySupply(2);
+                break;
+            case 4:
+                buySupply(3);
+                break;
+            case 5: 
+                buySupply(4);
+                break;
+        }
+        cin.clear();
+        cin.ignore(LONG_MAX, '\n');
+        enterToContinue();
+        return;
     }
-    void inventoryPrices() 
+    void changePrice(int priceIndex)
     {
+        double price;
+        inventorySys inv;
+        
+        cout << "Set the price for " << item[priceIndex] << ": ";
+        cin >> price;
+
+        if(price == 0)
+        {
+            cin.clear();
+            return;
+        }
+        if(!price || price > 999 || price < 0)
+        {
+            cout << "insert a number grater than 0 and lowe than 999\n";
+            cin.clear();
+            cin.ignore(LONG_MAX, '\n');
+            changePrice(priceIndex);
+        }
+
+        cout << "The new price for " << item[priceIndex] << " is " << price << "\n\n";
+        setPrice(priceIndex, price);
+        return;
+
+    }
+    void priceMenu() 
+    {
+        int selector;
+
         cout << "Inventory\n\n";
         cout << "no. | item\t| price\n";
-        for (int itemIndex = 0; itemIndex < 5; itemIndex ++)
+        for (int itemIndex = 0; itemIndex < 5; itemIndex++)
         {
-            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << price[itemIndex] << "\n";
+            cout << itemIndex + 1 << ")  | " << item[itemIndex] << "\t| " << prices[itemIndex] << "\n";
         }
         cout << "0) Exit\n\n";
-        setPrices();
+
+        cout << "select an item: ";
+        cin >> selector;
+        if(selector == 0)
+        {
+            cin.clear();
+            enterToContinueIn();
+            return;
+        }
+        if(!selector || selector > 5 || selector < 0)
+        {
+            cout << "error, insert a number 1-5\n";
+            cin.clear();
+            cin.ignore(LONG_MAX, '\n');
+            priceMenu();
+        }
+        switch(selector)
+        {
+            case 1:
+                changePrice(0);
+                break;
+            case 2:
+                changePrice(1);
+                break;
+            case 3:
+                changePrice(2);
+                break;
+            case 4:
+                changePrice(3);
+                break;
+            case 5:
+                changePrice(4);
+                break;
+        }
+        cin.clear();
+        cin.ignore(LONG_MAX, '\n');
+        enterToContinue();
+        return;
+    }
+    private:
+    double setPrice(int index, double price)
+    {
+        this->prices[index] = price;
+        return 0;
     }
     int buyItems (int itemIn, int itemQ)
     {
         this->itemsBought[itemIn] = itemQ;
         return 0;
     }
-    void buySupplies()
+    void enterToContinue()
     {
-        int selector;
-        int quantity;
-        inventorySys inv;
-
-        cout << "select an item: ";
-        cin >> selector;
-        switch(selector)
+        cout << "Enter to Continue";
+        if(!cin.get() == 10)
         {
-            case 0:
-                return;
-            case 1:
-                cout << "how many " << item[0] << " do you want to buy?: ";
-                cin >> quantity;
-                cout << "you bought " << quantity << " " << item[0] << "\n\n";
-                buyItems(0, quantity);
-                break;
-            case 2:
-                cout << "how many " << item[1] << " do you want to buy?: ";
-                cin >> quantity;
-                cout << "you bought " << quantity << " " << item[1] << "\n\n";
-                buyItems(1, quantity);
-                break;
-            case 3:
-                cout << "how many " << item[2] << " do you want to buy?: ";
-                cin >> quantity;
-                cout << "you bought " << quantity << " " << item[2] << "\n\n";
-                buyItems(2, quantity);
-                break;
-            case 4:
-                cout << "how many " << item[3] << " do you want to buy?: ";
-                cin >> quantity;
-                cout << "you bought " << quantity << " " << item[3] << "\n\n";
-                buyItems(3, quantity);
-                break;
-            case 5:
-                cout << "how many " << item[4] << " do you want to buy?: ";
-                cin >> quantity;
-                cout << "you bought " << quantity << " " << item[4] << "\n\n";
-                buyItems(4, quantity);
-                break;
-            default:
-                cout << "\nInsert a menun number (1-4)\n";
-                cin.clear();
-                if(!selector)
-                {
-                    cin.ignore(LONG_MAX, '\n');
-                }
-                break;
+            enterToContinue();
         }
-        return;
+        cout << "\n";
     }
-    void setPrices()
+    void enterToContinueIn()
     {
-        int selector;
-        double price;
-
-        cout << "select an item: ";
-        cin >> selector;
-        switch(selector)
+        cout << "Enter to Continue";
+        cin.ignore(LONG_MAX, '\n');
+        if(!cin.get() == 10)
         {
-            case 0:
-                return;
-            case 1:
-            cout << "Set the price for " << item[0] << " : ";
-            cin >> price;
-            cout << "the price of " << item[0] << " is set to " << price[0] << " \n";
-
+            enterToContinueIn();
         }
+        cout << "\n";
     }
 };

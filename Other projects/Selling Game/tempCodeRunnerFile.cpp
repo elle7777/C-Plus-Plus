@@ -1,1 +1,1 @@
-    cin.get();
+            enterToContinue();

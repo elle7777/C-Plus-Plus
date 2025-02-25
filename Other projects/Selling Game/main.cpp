@@ -41,35 +41,31 @@ int menu()
     }
     return selector;
 }
-void enterToContinue()
-{
-    cin.clear();
-    cin.get();
-    cout << "Enter to Continue";
-    if(cin.get() == 10){}
-    else
-    {
-        enterToContinue();
-    }
-    cout << "\n";
-}
 int main()
 {
     int selector;
     inventorySys inv;
-    //inv.item[5] = {"apples", "oranges", "bananas", "plums", "peaches"};
     
-
     cout << "[---Selling Game---]\n\n";
     while (true)
     {
         selector = menu();
-        if(selector == 0){continue;}
-        //enterToContinue();
-        if(selector == 1){inv.inventory();}
-        //enterToContinue();
-        if(selector == 2){inv.supplier();}
-        enterToContinue();
+        if(selector == 0)
+        {
+            continue;
+        }
+        if(selector == 1)
+        {
+            inv.inventory();
+        }
+        if(selector == 2)
+        {
+            inv.supplyMenu();
+        }
+        if(selector == 3)
+        {
+            inv.priceMenu();
+        }
     }
     return 0;
 }
