@@ -10,7 +10,8 @@ int menu()
     cout << "1) See inventory\n";
     cout << "2) Buy supplies\n";
     cout << "3) Set price\n";
-    cout << "4) Sell Surplus\n\n";
+    cout << "4) Sell Surplus\n";
+    cout << "5) Start Day\n\n";
 
     cout << "Select an option: ";
     cin >> selector;
@@ -30,8 +31,11 @@ int menu()
         case 4: 
             cout << "\nyou Selected Sell Surplus\n\n";
             break;
+        case 5:
+            cout << "\nyou Selected Start Day\n\n";
+            break;
         default:
-            cout << "\nInsert a menun number (1-4)\n";
+            cout << "\nInsert a menun number (1-5)\n";
             cin.clear();
             if(!selector)
             {
@@ -65,6 +69,14 @@ int main()
         if(selector == 3)
         {
             inv.priceMenu();
+        }
+        if(selector == 4)
+        {
+            inv.surplusMenu();
+        }
+        if(selector == 5)
+        {
+            inv.startDay();
         }
     }
     return 0;
